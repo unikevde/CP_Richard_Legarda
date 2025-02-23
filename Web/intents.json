@@ -1,0 +1,111 @@
+{
+  "intents": [
+    {
+      "tag": "saludo",
+      "patterns": [
+        "Hola",
+        "Buen día",
+        "¿Cómo estás?",
+        "Qué tal",
+        "Hola, ¿cómo puedo configurar algo?"
+      ],
+      "responses": [
+        "¡Hola! ¿En que puedo ayudarte?",
+        "¡Buen dia! ¿Que vamos hacer hoy?",
+        "¡Empezemos! ¿Qué necesitas configurar?"
+      ]
+    },
+    {
+      "tag": "red",
+      "patterns": [
+        "Procedimiento para configurar red",
+        "Guia para configurar red",
+        "Metodo configurar la red",
+        "Qué pasos debo seguir para configurar la red"
+      ],
+      "responses": [
+        "Para configurar un equipo a la red sigue los siguientes pasos:,- Busca tu equipo con la dirección MAC.,- Revisa la configuración del puerto en el switch.,- Configura el puerto con la VLAN correcta y guarda los cambios en el switch.",
+        "Te muestro como debes ingresar un equipo a la red :,♦ Busca tu equipo con la dirección MAC.,♦ Luego revisa la configuración del puerto en el switch.,♦ Configura el puerto con la VLAN correcta y guarda los cambios en el switch.",
+        "Ejecuta las siguientes indicaciones:,• Busca tu equipo con la dirección MAC.,• Revisa la configuración del puerto en el switch.,• Configura el puerto con VLAN correcta y guarda los cambios en el switch."
+      ]
+    },
+
+    {
+      "tag": "buscar_equipo",
+      "patterns": [
+        "Buscar computador con direccion MAC",
+        "Encontrar un equipo direccion MAC",
+        "Buscar equipo con direccion MAC",
+        "Encontar computador con direccion MAC ",
+        "Buscar direccion MAC "
+      ],
+      "responses": [
+        "Para encontar tu equipo en el switch debemos realizar la busqueda por la direccion MAC.",
+        "Tu computador tiene una direccion MAC,esta direccion MAC se encuentra en algun puerto del switch.",
+        "El switch de red tiene registrado todas la direcciones MAC de todos los equipos conectados.Verifica que tu equipo se encuentra conectado al punto de red.Y empezemos a buscarlo"
+      ]
+    },
+     
+    {
+      "tag": "ver_puerto",
+      "patterns": [
+        "Ver configuración de puerto",
+        "Revisar la configuracion del puerto",
+        "Mostrar detalles del puerto",
+        "Consultar un puerto en el switch"
+      ],
+      "responses": [
+        "Los puertos de un Switch estan enumerados de la siguiente manera: numero/numero.Ejemplo:1/1.",
+        "Hagamoslo, Recuerda ingresar el numero de puerto en el formato correcto.",
+        "Bueno empezemos,Ten presente la numeracion del puerto para realizar la busqueda."
+      ]
+    },
+
+    {
+      "tag": "configurar_vlan",
+      "patterns": [
+      "Cambiar descripcion",
+      "Quiero cambiar la VLAN y descripcion de un puerto",
+      "Poner descripción y VLAN en el puerto",
+      "Modificar VLAN y comentario en el puerto",
+      "Configurar vlan"
+      ],
+      "responses": [
+        "Las VLAN disponibles para esta sistema son: VLAN 12 para Equipos de la red de Produccion y VLAN 13 para equipos de la red Administrativo.",
+        "Las VLAN que puedes utilizar en el chatbot son:VLAN 12 para Equipos de la red de Produccion y VLAN 13 para equipos de la red Administrativo.",
+        "Tu puedes escoger las siguientes opciones: VLAN 12 para Equipos de la red de Produccion y VLAN 13 para equipos de la red Administrativo."
+      ]
+    },
+    
+    {
+      "tag": "guardar_configuracion",
+      "patterns": [
+        "Guardar la configuración realizada",
+        "Guardar cambios realizados",
+        "Necesito guardar en el switch",
+        "Quiero guardar los cambios",
+        "Guardar ajustes en el switch"
+      ],
+      "responses": [
+        "A continuacion vamos a guardar los cambios realizados en los puertos del Switch.",
+        "Se inicia el proceso para guardar los cambios...",
+        "Ok.Vamos a guardar los cambios realizados."
+      ]
+    },
+
+    {
+      "tag": "finalizar",
+      "patterns": [
+        "Hoy ya terminamos",
+        "Hemos finalizamos",
+        "Todo se encuentra bien",
+        "fin con exito"
+      ],
+      "responses": [
+        "¡Adiós! Si necesitas algo más, no dudes en pedírmelo.",
+        "¡Hasta luego! Que tengas un buen día.",
+        "¡Nos vemos pronto!"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'Web/estilo.css' %}">
+</head>
+<body>
+    <h1>Login</h1>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <label for="user">Usuario:</label>
+        {{ form.user.errors }}
+        {{ form.user }}
+
+        <label for="password">Password:</label>
+        {{ form.password.errors }}
+        {{ form.password }}
+
+        <input type="submit" value="Login">
+    </form>
+
+    {% if form.errors %}
+        <p style="color: red;">{{ form.errors }}</p>
+    {% endif %}
+    <p>¿No tienes una cuenta? <a href="{% url 'registro' %}">Regístrate aquí</a></p>
+</body>
+</html>
+
+

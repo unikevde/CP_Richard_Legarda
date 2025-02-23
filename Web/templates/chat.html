@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chatbot</title>
+    <link rel="stylesheet" href="{% static 'Web/estilo_chat_responsive.css' %}">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            background: #f5f7fa;
+        }
+        #header {
+            display: flex;
+            justify-content: flex-end; /* Alinea todo el contenido a la derecha */
+            align-items: center; /* Asegura que estén alineados verticalmente */
+            padding: 10px 20px;
+            background: linear-gradient(to right, #284c75, #4a90e2);
+            color: white;
+            gap: 10px; /* Añade espacio entre los elementos si es necesario */
+        }
+        #chat-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            background: #e9ebf1;
+            padding: 10px;
+            overflow-y: auto;
+            height: calc(100vh - 120px); /* Ajusta el alto restando el tamaño del header y footer */
+        }
+        #chat {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        #chat .user {
+            align-self: flex-end;
+            background: #4a90e2;
+            color: white;
+            padding: 10px;
+            border-radius: 10px;
+            max-width: 60%;
+        }
+        #chat .bot {
+            align-self: flex-start;
+            background: #f1f2f6;
+            color: #333;
+            padding: 10px;
+            border-radius: 10px;
+            width: auto; /* Permitir que se ajuste automáticamente */
+            max-width: 90%; /* Limitar al 90% del ancho del contenedor */
+            word-wrap: break-word; /* Ajustar texto largo */
+            box-sizing: border-box; /* Incluir padding y bordes dentro del ancho */
+            font-size: 16px; /* Aumentar tamaño de fuente si es necesario */
+
+        }
+        #input-container {
+            display: flex;
+            align-items: center;
+            padding: 10px;
+            background: white;
+        }
+        #mensaje {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-right: 10px;
+        }
+        #enviar {
+            background: #4a90e2;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        #enviar:hover {
+            background: #3b78d1;
+        }
+    </style>
+    </style>
+</head>
+<body>
+    <div id="header">
+        <p>Bienvenido, {{ request.session.user_name }}</p>
+        <p>Agencia: {{ request.session.agencia_nombre }}</p>
+        <a href="{% url 'salir' %}" id="logout">Salir</a>
+    </div>
+    <div id="chat-container">
+        <div id="chat"></div>
+        <div id="input-container">
+            <input type="text" id="mensaje" placeholder="Escribe tu mensaje">
+            <button id="enviar">Enviar</button>
+        </div>
+
+    </div>
+
+    <script>
+        const chatContainer = document.getElementById("chat");
+        const inputMensaje = document.getElementById("mensaje");
+        const btnEnviar = document.getElementById("enviar");
+
+        function agregarMensaje(tipo, mensaje) {
+            const p = document.createElement("p");
+            p.className = tipo;
+           // p.innerText = mensaje;
+            p.innerHTML = mensaje; // Cambiado a innerHTML para interpretar etiquetas HTML
+            chatContainer.appendChild(p);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+        }
+
+        async function enviarMensaje() {
+            const mensaje = inputMensaje.value.trim();
+            if (!mensaje) return;
+
+            agregarMensaje("user", mensaje); // Mostrar mensaje del usuario
+            inputMensaje.value = "";
+
+            try {
+                const respuesta = await fetch("/chatbot/", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ mensaje: mensaje }),
+                });
+
+                if (respuesta.ok) {
+                    const datos = await respuesta.json();
+                    agregarMensaje("bot", datos.respuesta); // Mostrar respuesta del chatbot
+                } else {
+                    agregarMensaje("bot", "Error: No se pudo procesar tu solicitud.");
+                }
+            } catch (error) {
+                agregarMensaje("bot", "Error de conexión. Intenta nuevamente.");
+            }
+        }
+
+        btnEnviar.addEventListener("click", enviarMensaje);
+
+        inputMensaje.addEventListener("keypress", (event) => {
+            if (event.key === "Enter") {
+                enviarMensaje();
+            }
+        });
+
+    </script>
+</body>
+</html>

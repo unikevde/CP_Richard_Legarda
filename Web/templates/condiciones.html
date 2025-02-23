@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Condiciones del Registro</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 50px;
+        }
+        .container {
+            border: 1px solid #ccc;
+            padding: 20px;
+            max-width: 500px;
+            margin: auto;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+        }
+        .button {
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+        }
+        .button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h2>!! Registro Exitoso !!</h2>
+        <p>Se han enviado los datos de registro a tu correo.</p>
+        <p>Para que su usuario sea activado y pueda utilizar el servicio de chatbot, debe enviar el formulario <strong>F06V01-PRO-GTI-IOT-003</strong> por mesa de soporte,
+            <a href="https://soportic.registrocivil.gob.ec" target="_blank">https://soportic.registrocivil.gob.ec</a>.
+        </p>
+        
+        <a href="{% url 'inicio' %}" class="button">Volver al inicio</a>
+    </div>
+
+</body>
+</html>
